@@ -6,6 +6,22 @@ export default function Home() {
     const [input, setInput] = useState('');
     const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const text = event.target?.result as string;
+            if (text) {
+                setInput(prev => prev + (prev ? '\n\n' : '') + `[Document: ${file.name}]\n${text}\n`);
+            }
+        };
+        reader.readAsText(file);
+        e.target.value = ''; // Reset input to allow re-uploading the same file
+    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -128,8 +144,10 @@ export default function Home() {
                 {/* Input Area */}
                 <div className="absolute bottom-0 w-full p-6 sm:px-10 sm:pb-10 pt-28 bg-gradient-to-t from-[#030305] via-[#050508]/90 to-transparent pointer-events-none">
                     <form onSubmit={sendMessage} className="relative max-w-4xl mx-auto flex items-end bg-slate-900/80 rounded-2xl border border-slate-700/60 shadow-[0_0_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl focus-within:border-indigo-500/70 focus-within:bg-slate-800/90 transition-all duration-300 pointer-events-auto ring-1 ring-black/20">
+                        <input type="file" ref={fileInputRef} onChange={handleFileUpload} className="hidden" accept=".txt,.json,.md,.csv,.js,.ts,.py,.html,.css" />
                         <button
                             type="button"
+                            onClick={() => fileInputRef.current?.click()}
                             className="p-3 m-2.5 mb-2.5 rounded-xl bg-slate-800/40 text-slate-400 hover:text-white hover:bg-slate-700/80 transition-all duration-300 flex items-center justify-center shrink-0 border border-slate-700/50 group relative hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                             title="Add files, connectors, and more /"
                         >
