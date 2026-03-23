@@ -128,12 +128,19 @@ export default function Home() {
                 {/* Input Area */}
                 <div className="absolute bottom-0 w-full p-6 sm:px-10 sm:pb-10 pt-28 bg-gradient-to-t from-[#030305] via-[#050508]/90 to-transparent pointer-events-none">
                     <form onSubmit={sendMessage} className="relative max-w-4xl mx-auto flex items-end bg-slate-900/80 rounded-2xl border border-slate-700/60 shadow-[0_0_40px_rgba(0,0,0,0.5)] backdrop-blur-2xl focus-within:border-indigo-500/70 focus-within:bg-slate-800/90 transition-all duration-300 pointer-events-auto ring-1 ring-black/20">
+                        <button
+                            type="button"
+                            className="p-3 m-2.5 mb-2.5 rounded-xl bg-slate-800/40 text-slate-400 hover:text-white hover:bg-slate-700/80 transition-all duration-300 flex items-center justify-center shrink-0 border border-slate-700/50 group relative hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                            title="Add files, connectors, and more /"
+                        >
+                            <svg className="w-5 h-5 transition-transform group-hover:scale-110" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                        </button>
                         <textarea
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(e as any); } }}
                             placeholder="Ask DocMind anything..."
-                            className="w-full bg-transparent text-slate-50 placeholder-slate-400 border-0 focus:ring-0 p-5 max-h-48 resize-none outline-none text-[16px] font-medium leading-relaxed"
+                            className="w-full bg-transparent text-slate-50 placeholder-slate-400 border-0 focus:ring-0 py-5 pr-5 max-h-48 resize-none outline-none text-[16px] font-medium leading-relaxed"
                             rows={1}
                         />
                         <button 
