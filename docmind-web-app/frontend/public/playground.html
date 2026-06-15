@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DocMind Web Playground</title>
+  <link rel="stylesheet" href="playground.css">
+</head>
+<body>
+  <div class="playground-container">
+    <header class="header">
+      <h1>DocMind <span class="accent">Playground</span></h1>
+      <p>Interactive web UI to test document queries and RAG retrieval pipelines.</p>
+    </header>
+    
+    <main class="main">
+      <section class="card query-panel">
+        <h2>Document Retrieval Test</h2>
+        <div class="form-group">
+          <label for="query-input">Query String</label>
+          <input type="text" id="query-input" placeholder="Type what you want to retrieve from your documents...">
+        </div>
+        <div class="form-group">
+          <label for="k-value">Top K Results</label>
+          <input type="number" id="k-value" value="4" min="1" max="10">
+        </div>
+        <button id="search-btn" class="btn">Search Vector DB</button>
+      </section>
+
+      <section class="card results-panel">
+        <h2>Retrieved Contexts</h2>
+        <div id="results" class="results-list">
+          <p class="placeholder-text">Enter a query above to see retrieved documents...</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="playground.js"></script>
+</body>
+</html>
